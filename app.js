@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars')
 var fileUplode = require('express-fileupload')
-
+var  db = require('./config/conection')
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
 
@@ -22,6 +22,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUplode())
+
+// mongodb
+db.connect((err) => {
+if(err){
+  console.log('Connection Error');
+}else
+console.log("Database connected to port 27017");
+})
+
+// route
 app.use('/', usersRouter);
 app.use('/admin', adminRouter);
 
