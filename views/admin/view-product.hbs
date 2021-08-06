@@ -17,14 +17,14 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each Product}}
+                {{#each products}}
                 <tr>
                     <th scope="row">1</th>
-                    <td>{{name}}</td>
-                    <td>{{category}}</td>
-                    <td>{{description}}</td>
-                    <td>nill</td>
-                    <td><img src="{{image}}" style="width: 50px; height: 50px;" alt=""></td>
+                    <td>{{Name}}</td>
+                    <td>{{Category}}</td>
+                    <td>{{Description}}</td>
+                    <td>{{Price}}</td>
+                    <td><img src="/images/product-images/{{_id}}.jpg" style="width: 50px; height: 50px;" alt=""></td>
                 </tr>
                 {{/each}}
 
