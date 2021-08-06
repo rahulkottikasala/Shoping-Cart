@@ -15,7 +15,9 @@ module.exports = {
         // fetch data from database
         return new Promise(async(resolve,reject) => {
             let products = await db.get().collection(collections.PRODUCT_COLLECTION).find().toArray()
-            console.log(products);
+            
+            // console.log(products);
+            
             resolve(products)
         })
     }
