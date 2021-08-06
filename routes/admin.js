@@ -5,7 +5,8 @@ var productHelpers = require('../helpers/product-helpers')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-
+  
+  // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
     res.render('admin/view-product', { admin: true,products})
   })
