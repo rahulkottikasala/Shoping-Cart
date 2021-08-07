@@ -13,9 +13,17 @@ router.get('/', function(req, res, next) {
     productHelpers.getAllProducts().then((products) => {
       res.render('user/view-product', {products})
     })
-  
-  
   });
+/* GET login page. */
+router.get('/login', (req,res) => {
+  res.render('user/login')
+});
+
+/* GET signup page. */
+router.get('/signup', (req,res) => {
+  res.render('user/signup')
+});
+
 
 
 module.exports = router;
