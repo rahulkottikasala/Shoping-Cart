@@ -12,7 +12,7 @@ module.exports = {
     },
     getAllProducts :  () => {
 
-        // fetch data from database
+        // fetch data (Product) from database
         return new Promise(async(resolve,reject) => {
             let products = await db.get().collection(collections.PRODUCT_COLLECTION).find().toArray()
             
