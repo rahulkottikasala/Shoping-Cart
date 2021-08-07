@@ -24,7 +24,7 @@ router.post('/add-product', (req, res) => {
     var image = req.files.Image
 
     // console.log(id);
-    
+
     image.mv('./public/images/product-images/' + id + '.jpg', (err) => {
       if (!err) {
         res.render('admin/add-product',{ admin: true})
@@ -36,4 +36,4 @@ router.post('/add-product', (req, res) => {
   })
 })
 
-module.exports = router;
+module.exports =router
