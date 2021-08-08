@@ -21,12 +21,20 @@
                         </li>
                     </ul>
                 </div>
-               
+                {{#if user}}
                 <div class="col-md-6">
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/login" type="button" >LogIn</a>
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/signup" type="button" >SignUp</a>
-                    
-                </div>  
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/logout"type="button">LogOut</a>
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/about"type="button">{{user.fName}}</a>
+
+                </div>
+                {{else}}
+                <div class="col-md-6">
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/login" type="button">LogIn</a>
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/signup"type="button">SignUp</a>
+
+                </div>
+                {{/if}}
+
             </div>
         </div>
     </nav>

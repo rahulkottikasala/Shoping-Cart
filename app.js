@@ -8,6 +8,7 @@ var fileUpload = require('express-fileupload')
 var  db = require('./config/conection')
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
+var session = require('express-session')
 
 var app = express();
 
@@ -22,6 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
+
+// express session 
+app.use(session({secret:"key",cookie:{maxAge:600000}}))
 
 // mongodb
 db.connect((err) => {

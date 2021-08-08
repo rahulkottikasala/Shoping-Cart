@@ -8,12 +8,13 @@ var userHelpers = require('../helpers/user-helpers')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
+  let user = req.session.user
+  console.log(user);
 
 
   // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
-    res.render('user/view-product', { products })
+    res.render('user/view-product', { products, user})
   })
 });
 /* GET login page. */
@@ -24,6 +25,8 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
     if(response.status){
+      req.session.loggedIn = true;
+      req.session.user = response.user
       res.redirect('/')
     }else{
       res.redirect('/login')
@@ -40,7 +43,9 @@ router.get('/signup', (req, res) => {
 router.post('/signup', (req, res) => {
 
   userHelpers.doSignup(req.body).then((response) => {
-    console.log(response);
+    // console.log(response);
+    res.render('user/login')
+
   })
 })
 
