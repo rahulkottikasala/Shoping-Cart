@@ -24,11 +24,20 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
-    if(response.status){
+    if(response.userStatus){
       req.session.loggedIn = true;
       req.session.user = response.user
       res.redirect('/')
-    }else{
+    }else if(response.adminStatus){
+      // Data added to Admin page from Database
+  productHelpers.getAllProducts().then((products) => {
+    res.render('admin/view-product', { admin: true,products})
+  })
+      req.session.loggedIn = true;
+      req.session.user = response.user
+res.render('admin/view-product',{product})
+    }
+     else{
       res.redirect('/login')
     }
   })
