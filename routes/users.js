@@ -19,7 +19,10 @@ router.get('/', function (req, res, next) {
 });
 /* GET login page. */
 router.get('/login', (req, res) => {
+  
+  
   if (req.session.loggedIn){
+
     res.redirect('/')
   }else
   res.render('user/login')
@@ -27,9 +30,13 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
+    let valid = {
+      invalid: 'Email or Password is Incorrect'
+    }
     if(response.userStatus){
       req.session.loggedIn = true;
-      req.session.user = response.user
+      req.session.loginErr = false;
+      req.session.user = response.user;
       res.redirect('/')
     }else if(response.adminStatus){
       // Data added to Admin page from Database
@@ -38,10 +45,10 @@ router.post('/login', (req, res) => {
   })
       req.session.loggedIn = true;
       req.session.user = response.user
-res.render('admin/view-product',{product})
     }
      else{
-      res.redirect('/login')
+    res.render('user/login',{'loginErr':req.session.loginErr})
+    req.session.loginErr = true
     }
   })
 
