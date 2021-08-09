@@ -2,9 +2,17 @@ const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 
-var productHelpers = require('../helpers/product-helpers')
-var userHelpers = require('../helpers/user-helpers')
+const productHelpers = require('../helpers/product-helpers')
+const userHelpers = require('../helpers/user-helpers')
 
+// user login verifying
+const verifyLogin = (req,res,next) => {
+  if(req.session.loggedIn){
+    next()
+  }else{
+    res.render('user/login')
+  }
+}
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -18,7 +26,7 @@ router.get('/', function (req, res, next) {
   })
 });
 /* GET login page. */
-router.get('/login', (req, res) => {
+router.get('/login',verifyLogin, (req, res) => {
   
   
   if (req.session.loggedIn){
@@ -72,7 +80,21 @@ router.post('/signup', (req, res) => {
 router.get('/logout',(req,res) => {
   req.session.destroy()
   res.redirect('/')
+}),
+
+/* cart page */
+router.get('/cart',verifyLogin, (req,res) => {
+  
+    res.render('user/cart')
+  
+}),
+
+/* orders page */
+router.get('/orders',verifyLogin, (req,res) => {
+  res.render('user/orders')
 })
+
+
 
 
 module.exports = router;
