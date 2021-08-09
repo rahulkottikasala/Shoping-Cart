@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
     }
      else{
     res.render('user/login',{'loginErr':req.session.loginErr})
-    req.session.loginErr = true
+    req.session.loginErr = 'Invalid Username or Password'
     }
   })
 
