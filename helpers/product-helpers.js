@@ -1,5 +1,7 @@
 var db = require('../config/conection')
 var collections = require('../config/collections')
+const { response } = require('express')
+const { ObjectId } = require('mongodb')
 
 module.exports = {
     addProduct: (product,callback) => {
@@ -19,6 +21,15 @@ module.exports = {
             // console.log(products);
             
             resolve(products)
+        })
+    },
+
+    deleteProduct : (proId) => {
+        return new Promise((resolve,reject) => {
+            // console.log('proId:'+proId);
+            db.get().collection(collections.PRODUCT_COLLECTION).deleteOne({_id : ObjectId(proId)}).then((response) =>{
+resolve(response)
+            })
         })
     }
 }
