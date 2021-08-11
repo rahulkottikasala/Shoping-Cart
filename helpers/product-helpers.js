@@ -18,7 +18,7 @@ module.exports = {
         return new Promise(async(resolve,reject) => {
             let products = await db.get().collection(collections.PRODUCT_COLLECTION).find().toArray()
             
-            // console.log(products);
+           
             
             resolve(products)
         })
@@ -31,5 +31,30 @@ module.exports = {
 resolve(response)
             })
         })
+    },
+    getProductDetails :  (proId) => {
+
+        // fetch data (Product) from database
+        return new Promise(async(resolve,reject) => {
+            let editProduct = await db.get().collection(collections.PRODUCT_COLLECTION).find({_id : ObjectId(proId)}).toArray()
+            
+           resolve(editProduct)
+        })
+    },
+    updateProduct : (proId,product) => {
+return new Promise ((resolve,reject) => {
+    console.log(proId);
+    db.get().collection(collections.PRODUCT_COLLECTION).updateOne({_id : ObjectId(proId)},{
+$set : { 
+        Name : product.Name,
+        Category : product.Category ,
+        Description : product.Description,
+        Price : product.Price
     }
+    }).then((response) => {
+        resolve()
+    })
+})
+    }
+
 }
