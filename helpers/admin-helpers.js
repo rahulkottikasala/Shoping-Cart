@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 module.exports = {
 
@@ -28,6 +29,16 @@ module.exports = {
                 resolve(response.adminStatus = false)
                 console.log('failed');
             }
+        })
+    },
+
+    doLogout : () => {
+         let response ={}
+        return new Promise((resolve, reject) => {
+            response.adminStatus = false
+            resolve(response)
+            console.log('logout');
+            console.log(response);
         })
     }
 }

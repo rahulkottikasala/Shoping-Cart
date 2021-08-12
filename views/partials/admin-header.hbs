@@ -8,7 +8,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{#if admin}}
                 <div class="col-md-6">
+                    
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/admin">All Product</a>
@@ -20,12 +22,15 @@
                             <a class="nav-link" href="#">All Order</a>
                         </li>
                 </div>
-{{#if admin}}
+                {{else}}
+                <div class="col-md-6">Access required</div>
+                {{/if}}
+              {{#if admin}}
                 <div class="col-md-6">
                     <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/administrator"
                         type="button">{{admin.Name}}</a>
                     
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/logout"
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/admin-logout"
                         type="button">Log Out</a>
                        
                 </div>

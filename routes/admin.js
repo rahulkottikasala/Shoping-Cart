@@ -10,7 +10,7 @@ const verifyAdmin = (req,res,next) => {
   if(req.session.loggedIn){
     next()
   }else{
-    res.render('admin/admin-login')
+    res.render('admin/admin-login',{adminAccess:true})
   }
 }
 
@@ -29,7 +29,7 @@ router.get('/',verifyAdmin, function (req, res, next) {
 
 });
 router.get('/add-product',verifyAdmin, (req, res) => {
-  res.render('admin/add-product', { admin :true })
+  res.render('admin/add-product', { adminAccess :true })
 });
 
 // Add Product
@@ -43,7 +43,7 @@ router.post('/add-product', (req, res) => {
 
     image.mv('./public/images/product-images/' + id + '.jpg', (err) => {
       if (!err) {
-        res.render('admin/add-product',{ admin :true})
+        res.render('admin/add-product',{ adminAccess :true})
       } else {
         console.log(err);
       }
@@ -54,7 +54,7 @@ router.post('/add-product', (req, res) => {
 
 // Delete Product
 
-router.get('/delete-product/:id', (req,res) => {
+router.get('/delete-product/:id',verifyAdmin, (req,res) => {
   let proId = req.params.id
   productHelpers.deleteProduct(proId).then((response) =>{
 
@@ -63,10 +63,10 @@ router.get('/delete-product/:id', (req,res) => {
 })
 
 // Edit Product
-router.get('/edit-product/:id',(req,res) => {
+router.get('/edit-product/:id',verifyAdmin,(req,res) => {
   let editProId = req.params.id
  productHelpers.getProductDetails(req.params.id).then((Product) => {
-    res.render('admin/edit-product',{Product,admin :true})
+    res.render('admin/edit-product',{Product,adminAccess :true})
   })
 })
 
@@ -81,11 +81,13 @@ image.mv('./public/images/product-images/' + id + '.jpg')
   })
 })
 
+
+// Admin Login
 router.get('/administrator',(req,res) => {
 if( req.session.loggedIn){
   res.redirect('/admin/')
 }else
-res.render('admin/admin-login',{admin :true })
+res.render('admin/admin-login',{adminAccess :true })
 })
 
 router.post('/administrator', (req,res) => {
@@ -98,8 +100,17 @@ router.post('/administrator', (req,res) => {
       res.redirect('/admin/')
 
     }else{
-      res.render('admin/admin-login',{admin :true})
+      res.render('admin/admin-login',{adminAccess :true})
     }
+  })
+})
+
+// Admin Logout
+router.get('/admin-logout', (req,res) => {
+  adminHelpers.doLogout().then((response) => {
+    
+    req.session.loggedIn = false;
+    res.render('admin/admin-login',{adminAccess :true })
   })
 })
 
