@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {{#if adminAccess}}
                 <div class="col-md-6">
-                    
+
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/admin">All Product</a>
@@ -22,10 +22,9 @@
                             <a class="nav-link" href="#">All Order</a>
                         </li>
                 </div>
-                {{else}}
-                <div class="col-md-6">Access required</div>
+
                 {{/if}}
-              {{#if adminAccess}}
+                {{#if adminAccess}}
                 <div class="col-md-6">
                     {{#if admin}}
                     <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/administrator"
@@ -33,15 +32,15 @@
                     {{/if}}
                     <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/admin-logout"
                         type="button">Log Out</a>
-                       
+
                 </div>
-                 {{else}}
+                {{else}}
                 <div class="col-md-6">
                     <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/admin/administrator"
                         type="button">Log In</a>
-                       
+
                 </div>
-{{/if}}
+                {{/if}}
 
             </div>
 

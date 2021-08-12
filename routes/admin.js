@@ -10,7 +10,7 @@ const verifyAdmin = (req,res,next) => {
   if(req.session.loggedIn){
     next()
   }else{
-    res.render('admin/admin-login',{adminAccess:true})
+    res.render('admin/admin-login',{doLogout:true})
   }
 }
 
@@ -87,7 +87,7 @@ router.get('/administrator',(req,res) => {
 if( req.session.loggedIn){
   res.redirect('/admin/')
 }else
-res.render('admin/admin-login',{adminAccess :true })
+res.render('admin/admin-login',{doLogout :true })
 })
 
 router.post('/administrator', (req,res) => {
@@ -110,7 +110,7 @@ router.get('/admin-logout', (req,res) => {
   adminHelpers.doLogout().then((response) => {
     
     req.session.loggedIn = false;
-    res.render('admin/admin-login',{adminAccess :true })
+    res.render('admin/admin-login',{doLogout :true })
   })
 })
 
