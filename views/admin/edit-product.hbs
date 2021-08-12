@@ -2,7 +2,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-center">Add Produduct</h2>
+                <h2 class="text-center">Edit Produduct</h2>
                  {{#each Product}}
                 <form action="/admin/edit-product/{{_id}}" enctype="multipart/form-data" method="POST">
                
@@ -21,9 +21,10 @@
                     <br>
 
                     <label for="">Current Image</label><br>
-                    <img src="/images/product-images/{{_id}}.jpg" style="height:auto; width: 50px;" alt=""><br><br>
+                    <img src="/images/product-images/{{_id}}.jpg" id="imgView" style="height:auto; width: 50px;" class="p-1" alt=""><br><br>
                     <label for="">Image</label>
-                    <input type="file" name="Image" class="form-controll mt-3 w-100"><br>
+                    <input type="file" name="Image" class="form-controll mt-3 w-100" onchange='imageChange(event)'> 
+                    <br>
                     {{/each}}
 
                     <button type="submit" class="btn btn-success mt-4">Submit</button>
@@ -32,3 +33,9 @@
         </div>
     </div>
 </section>
+<script>
+   function imageChange(event)  {
+        console.log(event)
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

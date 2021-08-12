@@ -1,12 +1,16 @@
 const { response } = require('express');
 var express = require('express');
+const { Admin } = require('mongodb');
 var router = express.Router();
 
-var productHelpers = require('../helpers/product-helpers')
+const productHelpers = require('../helpers/product-helpers')
+const userHelpers = require('../helpers/user-helpers')
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   
+  adminStatus =  userHelpers.doLogin
   // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
     res.render('admin/view-product', { admin: true,products})
@@ -65,6 +69,7 @@ image.mv('./public/images/product-images/' + id + '.jpg')
 
   })
 })
+
 
 
 
