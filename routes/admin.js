@@ -24,7 +24,7 @@ router.get('/',verifyAdmin, function (req, res, next) {
   
   // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
-    res.render('admin/view-product', {admin ,products})
+    res.render('admin/view-product', {admin,adminAccess:true,products})
   })
 
 });

@@ -10,11 +10,12 @@ module.exports = {
             Email: 'admin@gmail.com',
             Password: 'admin0'
         }
+
         let response = {}
 
         return new Promise((resolve, reject) => {
             // console.log(adminInfo);
-            // console.log(admin);
+            console.log(admin);
             if (admin.Email === adminInfo.Email) {
                 if (admin.Password === adminInfo.Password) {
                     response.admin = admin;
