@@ -38,24 +38,14 @@ router.get('/login',verifyLogin, (req, res) => {
 
 router.post('/login', (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
-    let valid = {
-      invalid: 'Email or Password is Incorrect'
-    }
+    
     if(response.userStatus){
       req.session.loggedIn = true;
       req.session.loginErr = false;
       req.session.user = response.user;
       res.redirect('/')
-    }else if(response.adminStatus){
-      // Data added to Admin page from Database
-  productHelpers.getAllProducts().then((products) => {
-    res.render('admin/view-product', { admin: true,products})
-  })
-      req.session.loggedIn = true;
-      req.session.user = response.user
-    }
-     else{
-    res.render('user/login',{'loginErr':req.session.loginErr})
+    }else{
+    res.render('user/login',{loginErr:req.session.loginErr})
     req.session.loginErr = 'Invalid Username or Password'
     }
   })
