@@ -19,7 +19,7 @@ const verifyLogin = (req, res, next) => {
 /* GET home page. */
 router.get('/', function (req, res, next) {
   let user = req.session.user
-  console.log(user);
+  // console.log(user);
 
 
   // Data added to Admin page from Database
@@ -77,12 +77,12 @@ router.get('/logout', (req, res) => {
 }),
 
   /* cart page */
-  router.get('/cart', verifyLogin, (req, res) => {
+  router.get('/cart', verifyLogin, async(req, res) => {
     let user = req.session.user
-    user
+    let product = await userHelpers.getCartItems(req.session.user._id)
+console.log(product);
 
-
-    res.render('user/cart', { user })
+    res.render('user/cart', {products, user })
 
   }),
 
