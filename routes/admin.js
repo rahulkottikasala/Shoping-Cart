@@ -83,7 +83,7 @@ router.post('/edit-product/:id', (req, res) => {
 
 
 // Admin Login
-router.get('/administrator',verifyAdmin, (req, res) => {
+router.get('/administrator', (req, res) => {
   if (req.session.adminLoggedIn) {
     res.redirect('/admin/')
   } else
@@ -95,13 +95,12 @@ router.post('/administrator', (req, res) => {
     // console.log(response);
     if (response.adminStatus) {
       req.session.adminLoggedIn = true;
-      req.session.adminLoggedIn = false;
       req.session.admin = response.admin;
       res.redirect('/admin/')
 
     } else {
       res.render('admin/admin-login', { loginErr: req.session.adminLoggedIn, doLogout: true })
-      req.session.loginErr = 'Invalid Username or Password'
+      req.session.adminLoginErr = 'Invalid Username or Password'
     }
   })
 })
