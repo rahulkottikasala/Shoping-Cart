@@ -1,6 +1,7 @@
 var db = require('../config/conection')
 var collections = require('../config/collections')
 const bcrypt = require('bcrypt')
+const { response } = require('express')
 
 
 
@@ -12,8 +13,8 @@ module.exports = {
             userData.password = await bcrypt.hash(userData.password, 10);
             // console.log(userData.password);
             db.get().collection(collections.USER_COLLECTION).insertOne(userData).then((data) => {
-                resolve(data)
-                // console.log(data);
+                console.log(userData);
+                resolve(userData)
             })
         })
 
