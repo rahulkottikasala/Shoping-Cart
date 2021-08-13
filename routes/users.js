@@ -8,6 +8,7 @@ const userHelpers = require('../helpers/user-helpers')
 // user login verifying
 const verifyLogin = (req, res, next) => {
   if (req.session.loggedIn) {
+
     next()
   } else {
     res.render('user/login')
@@ -22,7 +23,7 @@ router.get('/', function (req, res, next) {
 
   // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
-    res.render('user/view-product', { products, user })
+    res.render('user/view-product', { products,user })
   })
 });
 /* GET login page. */
@@ -76,14 +77,15 @@ router.get('/logout', (req, res) => {
 
   /* cart page */
   router.get('/cart', verifyLogin, (req, res) => {
-
-    res.render('user/cart')
+    let user = req.session.user
+    res.render('user/cart',{user})
 
   }),
 
   /* orders page */
   router.get('/orders', verifyLogin, (req, res) => {
-    res.render('user/orders')
+    let user = req.session.user
+    res.render('user/orders',{user})
   })
 
 
