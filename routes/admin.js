@@ -108,12 +108,10 @@ router.post('/administrator', (req, res) => {
 
 // Admin Logout
 router.get('/admin-logout', (req, res) => {
-  adminHelpers.doLogout().then((response) => {
 
-    req.session.loggedIn = false;
+    req.session.destroy()
     res.render('admin/admin-login', { doLogout: true })
 
-  })
 })
 
 // View Product

@@ -33,13 +33,5 @@ module.exports = {
         })
     },
 
-    doLogout : () => {
-         let response ={}
-        return new Promise((resolve, reject) => {
-            response.adminStatus = false
-            resolve(response)
-            console.log('logout');
-            console.log(response);
-        })
-    }
+   
 }
