@@ -54,7 +54,6 @@ router.post('/add-product', (req, res) => {
 })
 
 // Delete Product
-
 router.get('/delete-product/:id', verifyAdmin, (req, res) => {
   let proId = req.params.id
   productHelpers.deleteProduct(proId).then((response) => {
@@ -120,12 +119,21 @@ router.get('/admin-logout', (req, res) => {
 // View Product
 router.get('/view-users', verifyAdmin, (req, res) => {
   userHelpers.getUsers().then((users) => {
-    console.log('data:' + users);
     res.render('admin/view-users', { users, adminAccess: true })
   }).catch((err) => {
     console.log(err);
   })
 
+})
+
+// remove User
+router.get('/remove-user/:id',verifyAdmin,(req,res) => {
+let userId = req.params.id
+userHelpers.removeUser(userId).then((response) => {
+  if(response){
+    res.redirect('/admin/view-users')
+  }
+})
 })
 
 

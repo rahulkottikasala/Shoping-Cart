@@ -2,6 +2,7 @@ var db = require('../config/conection')
 var collections = require('../config/collections')
 const bcrypt = require('bcrypt')
 const { response } = require('express')
+const { ObjectId } = require('mongodb')
 
 
 
@@ -49,8 +50,15 @@ module.exports = {
         return new Promise(async(resolve,reject) => {
             let users =await db.get().collection(collections.USER_COLLECTION).find().toArray()
             resolve(users)
-            console.log(users);
+            // console.log(users);
         })
      
+    },
+    removeUser : (userId) => {
+        return new Promise((resolve,reject) => {
+            db.get().collection(collections.USER_COLLECTION).deleteOne({_id : ObjectId(userId)}).then((response) => {
+                resolve(response)
+            })
+        })
     }
 }

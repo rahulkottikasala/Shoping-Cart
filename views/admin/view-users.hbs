@@ -2,7 +2,7 @@
 
     
     <div class="container mt-3">
-            <a href="/admin/all-users" class="btn btn-primary float-end">View Users</a>
+            <a href="/admin/removed-users" class="btn btn-primary float-end">Removed Users</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,8 +23,8 @@
                     <td>{{email}}</td>
                     <td>{{_id}}</td>
                     <td>
-                        <a class="btn btn-primary" href="/admin/edit-product/{{_id}}" onclick="return confirm('Are you want to view  {{ Name}}')">Orders</a>
-                        <a class="btn btn-danger" href="/admin/delete-product/{{_id}}" onclick="return confirm('Are you want to detele  {{ Name}}')">Remove</a>
+                        <a class="btn btn-primary" href="/admin/view-orders/{{_id}}" onclick="return confirm('Are you want to view  {{ Name}}')">Orders</a>
+                        <a class="btn btn-danger" href="/admin/remove-user/{{_id}}" onclick="return confirm('Are you want to detele  {{ Name}}')">Remove</a>
                     </td>
                 </tr>
                 {{/each}}
