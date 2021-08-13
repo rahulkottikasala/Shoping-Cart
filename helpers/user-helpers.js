@@ -44,5 +44,13 @@ module.exports = {
                 resolve({userStatus:false})
             }
         })
+    },
+    getUsers: () => {
+        return new Promise(async(resolve,reject) => {
+            let users =await db.get().collection(collections.USER_COLLECTION).find().toArray()
+            resolve(users)
+            console.log(users);
+        })
+     
     }
 }
