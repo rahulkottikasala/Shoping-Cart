@@ -1,5 +1,6 @@
 const { response } = require('express');
 var express = require('express');
+const collections = require('../config/collections');
 var router = express.Router();
 
 const productHelpers = require('../helpers/product-helpers')
@@ -23,7 +24,7 @@ router.get('/', function (req, res, next) {
 
   // Data added to Admin page from Database
   productHelpers.getAllProducts().then((products) => {
-    res.render('user/view-product', { products,user })
+    res.render('user/view-product', { products, user })
   })
 });
 /* GET login page. */
@@ -61,7 +62,7 @@ router.get('/signup', (req, res) => {
 router.post('/signup', (req, res) => {
 
   userHelpers.doSignup(req.body).then((response) => {
-    console.log(response);
+    // console.log(response);
     req.session.loggedIn = true;
     req.session.user = response
     res.redirect('/')
@@ -78,15 +79,27 @@ router.get('/logout', (req, res) => {
   /* cart page */
   router.get('/cart', verifyLogin, (req, res) => {
     let user = req.session.user
-    res.render('user/cart',{user})
+    user
+
+
+    res.render('user/cart', { user })
 
   }),
 
-  /* orders page */
-  router.get('/orders', verifyLogin, (req, res) => {
-    let user = req.session.user
-    res.render('user/orders',{user})
+  /*Create cart collection*/
+  router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
+    userHelpers.addToCart(req.params.id, req.session.user._id).then((response) => {
+      res.redirect('/')
+    })
   })
+
+/* orders page */
+router.get('/orders', verifyLogin, (req, res) => {
+  let user = req.session.user
+  res.render('user/orders', { user })
+})
+
+
 
 
 
