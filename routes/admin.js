@@ -8,7 +8,7 @@ const adminHelpers = require('../helpers/admin-helpers')
 const userHelpers = require('../helpers/user-helpers')
 
 const verifyAdmin = (req, res, next) => {
-  if (req.session.loggedIn) {
+  if (req.session.adminLoggedIn) {
     next()
   } else {
     res.render('admin/admin-login', { doLogout: true })
@@ -83,8 +83,8 @@ router.post('/edit-product/:id', (req, res) => {
 
 
 // Admin Login
-router.get('/administrator', (req, res) => {
-  if (req.session.loggedIn) {
+router.get('/administrator',verifyAdmin, (req, res) => {
+  if (req.session.adminLoggedIn) {
     res.redirect('/admin/')
   } else
     res.render('admin/admin-login', { doLogout: true })
@@ -94,13 +94,13 @@ router.post('/administrator', (req, res) => {
   adminHelpers.doLogin(req.body).then((response) => {
     // console.log(response);
     if (response.adminStatus) {
-      req.session.loggedIn = true;
-      req.session.loginErr = false;
+      req.session.adminLoggedIn = true;
+      req.session.adminLoggedIn = false;
       req.session.admin = response.admin;
       res.redirect('/admin/')
 
     } else {
-      res.render('admin/admin-login', { loginErr: req.session.loginErr, doLogout: true })
+      res.render('admin/admin-login', { loginErr: req.session.adminLoggedIn, doLogout: true })
       req.session.loginErr = 'Invalid Username or Password'
     }
   })
