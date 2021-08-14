@@ -120,7 +120,7 @@ module.exports = {
                 count = cart.products.length
             }
             resolve(count)
-            console.log(count);
+            // console.log(count);
        
 
             })

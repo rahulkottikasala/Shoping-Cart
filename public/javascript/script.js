@@ -1,8 +1,14 @@
-function myFunction() {
-    var x = document.getElementById("myInput");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  } 
+function addToCart(proId)  {
+$.ajax({
+url : '/add-to-cart/'+proId,
+method : "get",
+success : (response) => {
+  if (response.status){
+    let count = $('#cart-count').html()
+    count = parseInt(count)+1
+    $("#cart-count").html(count)
+  }
+
+}
+})
+}

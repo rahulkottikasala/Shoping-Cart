@@ -91,8 +91,10 @@ router.get('/logout', (req, res) => {
 
   /*Create cart collection*/
   router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
+    // console.log('api call');
     userHelpers.addToCart(req.params.id, req.session.user._id).then((response) => {
-      res.redirect('/')
+      
+      res.json({status : true})
     })
   })
 
