@@ -11,10 +11,14 @@
                 <div class="col-md-6">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Product</a>
+                            <a class="nav-link active" aria-current="page" href="/">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/cart">Cart</a>
+                            <a class="nav-link " href="/cart">Cart
+                            {{#if cartCount}}
+                                <span class=" badge rounded-pill bg-danger"> {{cartCount}}</span>
+                                {{/if}}
+                            </a>
                         </li>
                         {{#if user}}
                         <li class="nav-item">
@@ -25,14 +29,17 @@
                 </div>
                 {{#if user}}
                 <div class="col-md-6">
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/logout"type="button">LogOut</a>
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="#"type="button">{{user.fName}}</a>
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/logout"
+                        type="button">LogOut</a>
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="#"
+                        type="button">{{user.fName}}</a>
 
                 </div>
                 {{else}}
                 <div class="col-md-6">
                     <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/login" type="button">LogIn</a>
-                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/signup"type="button">SignUp</a>
+                    <a class="btn btn-primary rounded-pill float-end btn-sm  mx-2" href="/signup"
+                        type="button">SignUp</a>
 
                 </div>
                 {{/if}}
