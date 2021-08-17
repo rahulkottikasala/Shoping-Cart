@@ -121,6 +121,10 @@ module.exports = {
                         foreignField: '_id',
                         as:'product'
                     }
+                },{
+                    $project: {
+                        item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
                 }
 
             ]).toArray()
@@ -138,6 +142,19 @@ module.exports = {
             resolve(count)
 
 
+        })
+    },
+    changeProductQuantity : (details) => {
+        let count = parseInt(details.count)
+        return new Promise ((resolve,reject) => {
+            db.get().collection(collections.CART_COLLECTION).updateOne({_id: ObjectId(details.cart),'products.item': ObjectId(details.product) },
+            {
+                $inc: { 'products.$.quantity': count }
+            }).then((response) => {
+               
+
+                resolve()
+            })
         })
     }
 }

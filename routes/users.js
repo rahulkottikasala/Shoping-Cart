@@ -104,6 +104,12 @@ router.get('/orders', verifyLogin, (req, res) => {
   res.render('user/orders', { user })
 })
 
+/* cart product change */
+router.post('/change-quantity',(req,res)=>{
+  userHelpers.changeProductQuantity(req.body).then(()=> {
+
+  })
+})
 
 
 

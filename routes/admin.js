@@ -81,7 +81,7 @@ router.post('/edit-product/:id', (req, res) => {
   })
 })
 
-
+ 
 // Admin Login
 router.get('/administrator', (req, res) => {
   if (req.session.adminLoggedIn) {
