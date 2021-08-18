@@ -152,11 +152,11 @@ module.exports = {
                 db.get().collection(collections.CART_COLLECTION)
                     .updateOne({ _id: ObjectId(details.cart) },
                         {
-                            $pull:{products: {item: ObjectId(details.product)}}
+                            $pull: { products: { item: ObjectId(details.product) } }
                         }
-                        ).then((response) => {
-                            resolve({ removeProduct: true })
-                        })
+                    ).then((response) => {
+                        resolve({ removeProduct: true })
+                    })
             } else {
                 db.get().collection(collections.CART_COLLECTION)
                     .updateOne({ _id: ObjectId(details.cart), 'products.item': ObjectId(details.product) },
@@ -169,5 +169,19 @@ module.exports = {
                         })
             }
         })
+    },
+    removeCartProduct: (details) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collections.CART_COLLECTION)
+                .updateOne({ _id: ObjectId(details.cart) },
+                    {
+                        $pull: { products: { item: ObjectId(details.product) } }
+                    }
+                ).then((response) => {
+                    console.log(response);
+                    resolve(true)
+                })
+        })
+
     }
 }

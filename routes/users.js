@@ -112,7 +112,13 @@ router.post('/change-product-quantity', (req, res) => {
     res.json(response)
   })
 })
-
+/* remove cart product  */
+router.post('/remove-cart-product',(req,res) => {
+  // console.log(req.body);
+  userHelpers.removeCartProduct(req.body).then((response) => {
+    res.json(response)
+  })
+})
 
 
 

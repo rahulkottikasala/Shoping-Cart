@@ -27,9 +27,9 @@
                         <button onclick="changeQuantity('{{_id}}','{{product._id}}',1)"
                             class="cart-items-count  btn btn-dark btn mx-2">+</button>
                     </td>
-                    <td>{{Price}}</td>
+                    <td>{{product.Price}}</td>
                     <td>
-                        <button class="btn btn-danger ">Remove</button>
+                        <button class="btn btn-danger" onclick="removeCartProduct('{{_id}}','{{product._id}}')">Remove</button>
                     </td>
                 </tr>
                 {{/each}}

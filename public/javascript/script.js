@@ -1,3 +1,6 @@
+const { response } = require("express")
+const { post } = require("../../routes/users")
+
 
 function addToCart(proId) {
   $.ajax({
@@ -35,5 +38,24 @@ function changeQuantity(cartId,proId,count){
       }
        
       }
+    })
+  }
+
+  function removeCartProduct (cartId,proId){
+    $.ajax({
+      url : '/remove-cart-product',
+      data : {
+        cart : cartId,
+        product : proId
+      },
+      method : 'post',
+      success : (response) => {
+        if(response){
+          alert('Product Removed from cart')
+        window.location.reload(true);
+        }
+        
+      }
+
     })
   }
