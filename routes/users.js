@@ -93,8 +93,8 @@ router.get('/logout', (req, res) => {
   router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
     // console.log('api call');
     userHelpers.addToCart(req.params.id, req.session.user._id).then((response) => {
-      
-      res.json({status : true})
+
+      res.json({ status: true })
     })
   })
 
@@ -105,9 +105,11 @@ router.get('/orders', verifyLogin, (req, res) => {
 })
 
 /* cart product change */
-router.post('/change-quantity',(req,res)=>{
-  userHelpers.changeProductQuantity(req.body).then(()=> {
-
+router.post('/change-product-quantity', (req, res) => {
+  console.log('rahul');
+  console.log(req.body);
+  userHelpers.changeProductQuantity(req.body).then((response) => {
+    res.json(response)
   })
 })
 

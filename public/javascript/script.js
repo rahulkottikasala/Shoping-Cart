@@ -14,18 +14,26 @@ function addToCart(proId) {
   })
 }
 
-
 function changeQuantity(cartId,proId,count){
-  $.ajax({
-    url : '/change-quantity',
-    data : {
-      cart : cartId,
-      product : proId,
-      count : count
-    },
-    method: 'post',
-    success : (response) => {
-     
-    }
-  })
-}
+  count = parseInt(count)
+  let quantity = parseInt(document.getElementById(proId).innerHTML)
+    $.ajax({
+      url : '/change-product-quantity',
+      data : {
+        cart : cartId,
+        product : proId,
+        count : count,
+        quantity : quantity
+      },
+      method: 'post',
+      success : (response) => {
+      if(response.removeProduct){
+        alert('Product Removed from cart')
+        window.location.reload(true);
+      }else{
+        document.getElementById(proId).innerHTML = quantity+count
+      }
+       
+      }
+    })
+  }
