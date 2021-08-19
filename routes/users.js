@@ -86,7 +86,7 @@ router.get('/logout', (req, res) => {
     let total =await userHelpers.getTotalAmount(user._id)
     // console.log(products);
 
-    res.render('user/cart', { products, user,total})
+    res.render('user/cart', { products,user : user._id,total})
 
   }),
 
@@ -107,7 +107,9 @@ router.get('/orders', verifyLogin, (req, res) => {
 
 /* cart product change */
 router.post('/change-product-quantity', (req, res) => {
-  userHelpers.changeProductQuantity(req.body).then((response) => {
+  let user = req.body.user
+  userHelpers.changeProductQuantity(req.body).then(async(response) => {
+   response.total =await userHelpers.getTotalAmount(user)
     res.json(response)
   })
 })

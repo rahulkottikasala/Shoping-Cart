@@ -24,10 +24,10 @@
                     <td class="">{{product.Name}}</td>
                     <td>{{product.Price}}</td>
                     <td>
-                        <button onclick="changeQuantity('{{_id}}','{{product._id}}',-1)" id="hide-button"
+                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user}}',-1)" id="hide-button"
                             class="cart-items-count btn btn-dark btn mx-2">-</button>
                         <span id="{{product._id}}"> {{quantity}}</span>
-                        <button onclick="changeQuantity('{{_id}}','{{product._id}}',1)"
+                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user}}',1)"
                             class="cart-items-count  btn btn-dark btn mx-2">+</button>
                     </td>
                     <td>{{product.Price}}</td>
@@ -42,14 +42,8 @@
             </tbody>
         </table>
         <hr>
-        <h3 class="float-end text-danger mt-5 me-5" id="final-price"><b> Total = Rs. {{total}} /-</b></h3><br>
+        <h3 class="float-end text-danger mt-5 me-5" ><b> Total = Rs. <span id="total">{{total}}</span> /-</b></h3><br>
         <a href="/place-order" class=" btn btn-success btn-lg"
-            style="margin-top: 2rem;width: 15rem;margin-block-end: 1rem;margin-left: 64rem;" >Place Order</a>
+            style="margin-top: 2rem;width: 15rem;margin-left: 64rem;" >Place Order</a>
     </div>
 </section>
-
-
-<script>
-
-
-</script>
