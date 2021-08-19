@@ -178,10 +178,13 @@ module.exports = {
                         $pull: { products: { item: ObjectId(details.product) } }
                     }
                 ).then((response) => {
-                    console.log(response);
                     resolve(true)
                 })
         })
 
+    },
+    getTotalAmount : (userId) => {
+        
+      
     }
 }

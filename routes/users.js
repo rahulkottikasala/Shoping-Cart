@@ -85,7 +85,7 @@ router.get('/logout', (req, res) => {
     let products = await userHelpers.getCartItems(req.session.user._id)
     // console.log(products);
 
-    res.render('user/cart', { products, user })
+    res.render('user/cart', { products, user})
 
   }),
 
@@ -106,8 +106,6 @@ router.get('/orders', verifyLogin, (req, res) => {
 
 /* cart product change */
 router.post('/change-product-quantity', (req, res) => {
-  console.log('rahul');
-  console.log(req.body);
   userHelpers.changeProductQuantity(req.body).then((response) => {
     res.json(response)
   })
@@ -118,6 +116,11 @@ router.post('/remove-cart-product',(req,res) => {
   userHelpers.removeCartProduct(req.body).then((response) => {
     res.json(response)
   })
+})
+
+/* place order */
+router.get('/place-order',(req,res) => {
+  res.render('user/place-order')
 })
 
 
