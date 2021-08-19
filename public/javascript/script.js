@@ -1,5 +1,4 @@
-const { response } = require("express")
-const { post } = require("../../routes/users")
+
 
 
 function addToCart(proId) {

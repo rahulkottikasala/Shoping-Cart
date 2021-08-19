@@ -83,9 +83,10 @@ router.get('/logout', (req, res) => {
   router.get('/cart', verifyLogin, async (req, res) => {
     let user = req.session.user
     let products = await userHelpers.getCartItems(req.session.user._id)
+    let total =await userHelpers.getTotalAmount(user._id)
     // console.log(products);
 
-    res.render('user/cart', { products, user})
+    res.render('user/cart', { products, user,total})
 
   }),
 
@@ -119,9 +120,10 @@ router.post('/remove-cart-product',(req,res) => {
 })
 
 /* place order */
-router.get('/place-order',verifyLogin,(req,res) => {
+router.get('/place-order',verifyLogin,async(req,res) => {
   let user = req.session.user
-  res.render('user/place-order',{user})
+  let total =await userHelpers.getTotalAmount(user._id)
+  res.render('user/place-order',{user,total})
 })
 
 
