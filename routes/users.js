@@ -119,8 +119,9 @@ router.post('/remove-cart-product',(req,res) => {
 })
 
 /* place order */
-router.get('/place-order',(req,res) => {
-  res.render('user/place-order')
+router.get('/place-order',verifyLogin,(req,res) => {
+  let user = req.session.user
+  res.render('user/place-order',{user})
 })
 
 
