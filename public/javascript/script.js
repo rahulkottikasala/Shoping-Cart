@@ -1,6 +1,4 @@
 
-
-
 function addToCart(proId) {
   $.ajax({
     url: '/add-to-cart/' + proId,
@@ -52,10 +50,26 @@ function changeQuantity(cartId,proId,userId,count){
       success : (response) => {
         if(response){
           alert('Product Removed from cart')
-        window.location.reload(true);
+          window.location.reload(true);
         }
         
       }
 
     })
   }
+
+
+  $("#checkout-form").submit((e) => {
+    e.preventDefault() // prevent actual form submit
+    $.ajax({
+        url:'/place-order',
+        method:'post',
+        data: $("#checkout-form").serialize(), // serializes form input
+
+        success : (response) => {
+       
+            alert('success')
+            window.location.href = "/orders"
+        }
+    })
+})

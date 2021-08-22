@@ -1,7 +1,7 @@
 <section>
     <div class="container">
 
-        <form action="">
+        <form action="" id="checkout-form">
             <h2 class="text-center">Enter Delivery Details</h2>
             <div class="row mt-5">
                 <div class="col-md-6 ps-4 mt-5">
@@ -11,21 +11,25 @@
                     <input name="mobile" class="w-75" type="text"><br>
                     <label class="mt-4" for="">Pin Code</label><br>
                     <input name="zipcode" class="w-75" type="text"><br>
+                    <input type="text" name="user" value="{{user._id}}" hidden>
+                    <input type="text"name="totalPrice" value="{{total}}" hidden>
+
                 </div>
                 <div class="card col-md-6 mt-5" style="height: 18rem; width: 20rem">
                     <div class="card-body">
-                        <h4>Total Amount : <br>{{total}} <span>Rs</span ></h4>
+                        <h4>Total Amount : <br>{{total}}<span>Rs</span ></h4>
                         <p>Payment Method</p>
-                        <input name="payment" id="payment1" type="radio">
+                        <input name="payment" value="cod" type="radio" checked>
                         <label for="">COD</label><br>
-                        <input name="payment" id="payment2" type="radio" checked>
+                        <input name="payment" value="online" type="radio" >
                         <label for="">ONLINE</label><br>
-                        <a class="btn btn-success mt-5 w-50 " href="">Submit</a>
+                        <button class="btn btn-success mt-5 w-50" type="submit">Submit</button>
                     </div>
-
-
                 </div>
             </div>
         </form>
     </div>
 </section>
+<script>
+    
+</script>

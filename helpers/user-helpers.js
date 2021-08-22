@@ -1,8 +1,8 @@
 var db = require('../config/conection')
 var collections = require('../config/collections')
 const bcrypt = require('bcrypt')
-const { response } = require('express')
 const { ObjectId } = require('mongodb')
+const { response } = require('express')
 
 
 
@@ -164,7 +164,7 @@ module.exports = {
                             $inc: { 'products.$.quantity': details.count }
                         }).then((response) => {
 
-                            resolve({status : true})
+                            resolve({ status: true })
                         })
             }
         })
@@ -182,7 +182,7 @@ module.exports = {
         })
 
     },
-    getTotalAmount : (userId) => {
+    getTotalAmount: (userId) => {
         return new Promise(async (resolve, reject) => {
             let total = await db.get().collection(collections.CART_COLLECTION).aggregate([
                 {
@@ -208,8 +208,8 @@ module.exports = {
                 },
                 {
                     $group: {
-                        _id:null,
-                        total:{$sum:{$multiply:['$quantity',{$toInt:'$product.Price'}]}}
+                        _id: null,
+                        total: { $sum: { $multiply: ['$quantity', { $toInt: '$product.Price' }] } }
                     }
                 }
 
@@ -217,5 +217,36 @@ module.exports = {
             // console.log(total[0].total);
             resolve(total[0].total)
         })
-    }
+    },
+    placeOrder: (details, product) => {
+        return new Promise((resolve, reject) => {
+
+            let status = details['payment'] === 'cod' ? 'placed' : 'pending'
+            let orderObject = {
+                deliverydetails: {
+                    mobile: details.mobile,
+                    addressn: details.address,
+                    pincode: details.zipcode
+                },
+                userId: ObjectId(details.user),
+                paymentMethod: details['payment'],
+                products: product,
+                totalAmount: details.totalPrice,
+                status: status,
+                date: new Date()
+            }
+            db.get().collection(collections.ORDER_COLLECTION).insertOne(orderObject).then((response) => {
+                db.get().collection(collections.CART_COLLECTION).deleteOne({ user: ObjectId(details.user) })
+                resolve()
+            })
+        })
+
+    },
+    getCartProductList: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            // let user = userId.toString()
+            let cart = await db.get().collection(collections.CART_COLLECTION).findOne({ user: ObjectId(userId) })
+            resolve(cart.products)
+        })
+    },
 }

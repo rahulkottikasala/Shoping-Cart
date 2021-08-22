@@ -1,6 +1,5 @@
 <section>
 
-
     <div class="container mt-3">
         <table class="col-md-12 table">
             <thead>
@@ -9,7 +8,6 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
                     <th scope="col"></th>
 
                 </tr>
@@ -24,13 +22,13 @@
                     <td class="">{{product.Name}}</td>
                     <td>{{product.Price}}</td>
                     <td>
-                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user}}',-1)" id="hide-button"
+                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user._id}}',-1)" id="hide-button"
                             class="cart-items-count btn btn-dark btn mx-2">-</button>
                         <span id="{{product._id}}"> {{quantity}}</span>
-                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user}}',1)"
+                        <button onclick="changeQuantity('{{_id}}','{{product._id}}','{{../user._id}}',1)"
                             class="cart-items-count  btn btn-dark btn mx-2">+</button>
                     </td>
-                    <td>{{product.Price}}</td>
+                    
                     <td>
                         <button class="btn btn-danger"
                             onclick="removeCartProduct('{{_id}}','{{product._id}}')">Remove</button>
@@ -46,4 +44,5 @@
         <a href="/place-order" class=" btn btn-success btn-lg"
             style="margin-top: 2rem;width: 15rem;margin-left: 64rem;" >Place Order</a>
     </div>
+    
 </section>
