@@ -58,21 +58,3 @@ function changeQuantity(cartId,proId,userId,count){
     })
   }
 
-
-  $("#checkout-form").submit((e) => {
-    e.preventDefault() // prevent actual form submit
-    $.ajax({
-        url:'/place-order',
-        method:'post',
-        data: $("#checkout-form").serialize(), // serializes form input
-
-        success : (response) => {
-       
-            alert('success')
-            if(response.status){
-              window.location.href = "/order-success"
-            }
-            
-        }
-    })
-})
