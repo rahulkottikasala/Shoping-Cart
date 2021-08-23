@@ -1,1 +1,44 @@
-<h1 class="text-center mt-5">orders sucess</h1>
+<section>
+
+
+    <div class="container mt-3">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Address</Address></th>
+                    <th scope="col">Pincode</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {{#each orders}}
+                    <th scope="row">1</th>
+                    <td class="w-25">{{date}}</td>
+                   
+                    <td class="w-25">{{deliverydetails.address}}</td>
+                    <td>{{deliverydetails.pincode}}</td>
+                    <td>{{deliverydetails.mobile}}</td>
+              
+                    <td>{{totalAmount}}</td>
+                    <td>{{paymentMethod}}</td>
+                    <td>{{status}}</td>
+                    <td>
+                        <a class="btn btn-primary btn" style="width: 150px;" href="/view-order-product/{{_id}}">Product </a>
+                    </td>
+                </tr>
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>

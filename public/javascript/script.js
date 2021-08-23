@@ -69,7 +69,10 @@ function changeQuantity(cartId,proId,userId,count){
         success : (response) => {
        
             alert('success')
-            window.location.href = "/orders"
+            if(response.status){
+              window.location.href = "/order-success"
+            }
+            
         }
     })
 })

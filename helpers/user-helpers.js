@@ -184,6 +184,7 @@ module.exports = {
     },
     getTotalAmount: (userId) => {
         return new Promise(async (resolve, reject) => {
+
             let total = await db.get().collection(collections.CART_COLLECTION).aggregate([
                 {
                     $match: { user: ObjectId(userId) }
@@ -211,10 +212,9 @@ module.exports = {
                         _id: null,
                         total: { $sum: { $multiply: ['$quantity', { $toInt: '$product.Price' }] } }
                     }
-                }
+                },
 
             ]).toArray()
-            // console.log(total[0].total);
             resolve(total[0].total)
         })
     },
@@ -225,7 +225,7 @@ module.exports = {
             let orderObject = {
                 deliverydetails: {
                     mobile: details.mobile,
-                    addressn: details.address,
+                    address: details.address,
                     pincode: details.zipcode
                 },
                 userId: ObjectId(details.user),
@@ -249,4 +249,13 @@ module.exports = {
             resolve(cart.products)
         })
     },
+    getOrderProduct : (userId) => {
+        return new Promise(async(resolve,reject) => {
+            let orderList = await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
+            console.log(orderList);
+            resolve(orderList)
+        })
+        
+    }
+
 }
