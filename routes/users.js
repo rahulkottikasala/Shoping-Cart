@@ -104,7 +104,7 @@ router.get('/logout', (req, res) => {
 router.get('/orders', verifyLogin,async (req, res) => {
   let user = req.session.user
   let orders =await userHelpers.getOrderProduct(user._id)
-  console.log(orders);
+  // console.log(orders);
 
   res.render('user/orders', { user,orders,deliDetails : orders.deliveryDetails })
 })
@@ -148,7 +148,13 @@ router.get('/order-success',verifyLogin, (req,res) => {
 
 
 /* Order Product details */
-
+router.get('/view-order-product/:id', async(req,res) => {
+  orderId = req.params.id
+  console.log(orderId);
+  let orderList =await userHelpers.getOrderProductDetails(orderId)
+  console.log(orderList);
+res.render('user/view-order-product',{orderList})
+})
 
 
 module.exports = router;

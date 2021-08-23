@@ -252,10 +252,39 @@ module.exports = {
     getOrderProduct : (userId) => {
         return new Promise(async(resolve,reject) => {
             let orderList = await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
-            console.log(orderList);
+            // console.log(orderList);
             resolve(orderList)
         })
         
+    },
+    getOrderProductDetails : (orderId) => {
+        return new Promise(async(resolve,reject) => {
+            let orderList = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
+                {
+                    $match: { _id : ObjectId(orderId) }
+                }, {
+                    $unwind: "$products"
+                }, {
+                    $project: {
+                        item: '$products.item',
+                        quantity: '$products.quantity'
+                    }
+                }, {
+                    $lookup: {
+                        from: collections.PRODUCT_COLLECTION,
+                        localField: 'item',
+                        foreignField: '_id',
+                        as: 'product'
+                    }
+                }, {
+                    $project: {
+                        item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+                    }
+                }
+
+            ]).toArray()
+            resolve(orderList)
+        })
     }
 
 }
