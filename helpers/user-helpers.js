@@ -255,7 +255,7 @@ module.exports = {
     },
     getOrderProduct : (userId) => {
         return new Promise(async(resolve,reject) => {
-            let orderList = await db.get().collection(collections.ORDER_COLLECTION).find().toArray()
+            let orderList = await db.get().collection(collections.ORDER_COLLECTION).find({userId : ObjectId(userId)}).toArray()
             // console.log(orderList);
             resolve(orderList)
         })
@@ -293,7 +293,7 @@ module.exports = {
     generateRazorpay : (orderId,total) => {
         return new Promise((resolve,reject) => {
             var options = {
-                amount: total,  // amount in the smallest currency unit
+                amount: total *100,  // amount in the smallest currency unit
                 currency: "INR",
                 receipt: ""+orderId  //orderId converted to string (""+)
               };
