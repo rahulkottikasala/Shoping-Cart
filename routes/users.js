@@ -165,8 +165,17 @@ router.get('/view-order-product/:id', async (req, res) => {
 })
 
 /* Razorpay peyment success */
-router.post('/verifyPeyment', (req, res) => {
+router.post('/verify-payment', (req, res) => {
   console.log(req.body);
+  userHelpers.verifyPayment(req.body).then(() => {
+    userHelpers.changePaymentstatus(req.body['order[receipt]']).then(() => {
+      console.log('payment successful');
+      res.json({status:true})
+    })
+  }).catch(err => {
+    console.log(err)
+    res.json({status:false})
+  })
 })
 
 

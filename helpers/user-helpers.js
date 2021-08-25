@@ -302,6 +302,35 @@ module.exports = {
                 resolve(order);
               });
         })
+    },
+    verifyPayment: (details) => {
+        return new Promise((resolve, reject) => {
+            const crypto = require('crypto');
+            let hash = crypto.createHmac('sha256', 'DLPO56wrUzdS7AlcXNfobMfy')
+            hash.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]'])
+            hash = hash.digest('hex')
+
+            if(hash == details['payment[razorpay_signature]']) {
+                resolve()
+            }else{
+                reject()
+            }
+
+        })
+    },
+    changePaymentstatus : (orderId) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collections.ORDER_COLLECTION)
+            .updateOne({_id : ObjectId(orderId)},
+            {
+                $set : {
+                    status :'placed'
+                }
+            }
+            ).then(() => {
+                resolve()
+            })
+       })
     }
 
 }
