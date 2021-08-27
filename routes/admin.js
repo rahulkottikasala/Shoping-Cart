@@ -99,7 +99,7 @@ router.post('/administrator', (req, res) => {
       res.redirect('/admin/')
 
     } else {
-      res.render('admin/admin-login', { loginErr: req.session.adminLoggedIn, doLogout: true })
+      res.render('admin/admin-login', { loginErr: req.session.adminLoginErr, doLogout: true })
       req.session.adminLoginErr = 'Invalid Username or Password'
     }
   })
