@@ -19,7 +19,7 @@
                 <input type="password" name="Password" class="form-control" id="password" required>
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" id="toggle-password">
+                <input type="checkbox"  class="form-check-input" id="toggle-password">
                 <label class="form-check-label" for="exampleCheck1"> Show Password</label>
 
             </div>
@@ -30,18 +30,6 @@
 
 </section>
 <script>
-    const password = document.getElementById("password");
-    const togglePassword = document.getElementById("toggle-password");
-
-    //checkbox click to 'checked'
-    togglePassword.addEventListener("click", toggleClicked);
-
-    function toggleClicked() {
-        if (this.checked) {
-            password.type = "text";
-        } else {
-            password.type = "password";
-        }
-    }
+   
  
 </script>

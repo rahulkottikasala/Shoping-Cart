@@ -57,3 +57,20 @@ function changeQuantity(cartId,proId,userId,count){
 
     })
   }
+
+  
+// Show Password
+
+  const password = document.getElementById("password");
+  const togglePassword = document.getElementById("toggle-password");
+
+  //checkbox click to 'checked'
+  togglePassword.addEventListener("click", toggleClicked);
+
+  function toggleClicked() {
+      if (this.checked) {
+          password.type = "text";
+      } else {
+          password.type = "password";
+      }
+  }
