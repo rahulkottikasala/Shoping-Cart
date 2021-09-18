@@ -24,6 +24,18 @@ module.exports = {
         })
 
     },
+    verifyEmail: (newEmail) => {
+        return new Promise(async(resolve, reject) => {
+            let response = {};
+            let oldUser = await db.get().collection(collections.USER_COLLECTION).findOne({ email: newEmail })
+            if(oldUser){
+                resolve({oldUser:true})
+            }else{
+                resolve({newUser: true})
+            }
+        })
+       
+    },
     doLogin: (userData) => {
         return new Promise(async (resolve, reject) => {
 
