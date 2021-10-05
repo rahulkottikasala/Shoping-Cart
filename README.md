@@ -7,10 +7,13 @@ Install dependencies
 
 npm install
 
+
+mongoDb install &Run
+
 Start NodeJS server at http://localhost:3000
 
 npm start
-node ./bin/www
+
 
 npm run dev
 For Nodemon usage
