@@ -22,3 +22,9 @@ nodemon ./bin/www
 Technologies
 NodeJS, Express, Express-Session, Nodemon, hbs - Express.js view engine for handlebars.js
 
+##################################################################
+/Admin Page Authentication
+
+userid : admin@gmail.com
+password : admin0
+##################################################################
